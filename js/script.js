@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
     fechaEvento: '2026-08-22T20:00:00',
 
     // Número de WhatsApp de contacto para la confirmación (código de país + número, sin "+" ni espacios).
-    numeroWhatsapp: '51999999999',
+    numeroWhatsapp: '51946948867',
 
     // Mensaje predefinido que se enviará al confirmar asistencia.
-    mensajeWhatsapp: 'CONFIRMO MI ASISTENCIA',
+    mensajeWhatsapp: 'CONFIRMO MI ASISTENCIA a tu webda',
 
     // Texto que se escribe con efecto de máquina de escribir en la Parte 1.
     nombreManuscrito: 'Milenka',
