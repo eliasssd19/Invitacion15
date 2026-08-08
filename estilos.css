@@ -1,0 +1,1099 @@
+/* ==========================================================================
+   INVITACIÓN DIGITAL · MIS XV · Tema "La Princesa y el Sapo"
+   Hoja de estilos general — Mobile First
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Montserrat:wght@400;600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES GLOBALES (paleta, tipografía, tiempos)
+   -------------------------------------------------------------------------- */
+:root {
+    /* Paleta de colores */
+    --verde-bosque: #1F3D2B;
+    --verde-oliva: #6B7A4F;
+    --verde-salvia: #A8B79A;
+    --crema: #FAF6ED;
+    --blanco-marfil: #FFF7E8;
+    --dorado: #D4AF37;
+    --dorado-champagne: #F8E7B5;
+    --dorado-oscuro: #8a6d1f;
+
+    /* Tipografía */
+    --fuente-titulo: 'Cinzel', serif;
+    --fuente-cuerpo: 'Cormorant Garamond', serif;
+    --fuente-manuscrita: 'Great Vibes', cursive;
+    --fuente-manuscrita-alt: 'Allura', cursive;
+
+    /* Tiempos de animación reutilizables */
+    --duracion-suave: 0.6s;
+    --duracion-media: 1.2s;
+    --duracion-lenta: 2s;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET Y BASE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+    min-height: 100vh;
+    color: var(--verde-bosque);
+    font-family: var(--fuente-cuerpo);
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* Utilidad de accesibilidad: respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+.pantalla {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--duracion-media) ease;
+}
+
+/* ==========================================================================
+   PARTE 1 · PORTADA
+   ========================================================================== */
+
+/*==================================================
+  CONTENEDOR PRINCIPAL DE LA PORTADA
+==================================================*/
+
+.contenido-portada{
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 5vh 1.5rem 8vh;
+    box-sizing: border-box;
+
+    gap: 8rem;
+}
+
+.parte-uno {
+    background: url("../multimedia/imagenes/fondo1.jpeg") center center / cover no-repeat;
+
+    flex-direction: column;
+    text-align: center;
+    padding: 8vh 6vw;
+    overflow: hidden;
+}
+
+.destello-ambiental {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 20%, rgba(248, 231, 181, 0.15), transparent 60%);
+    pointer-events: none;
+}
+
+.escena-titulo{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap: .3rem;
+
+    text-align:center;
+}
+
+.escena-titulo.subir {
+    transform: translateY(-8vh);
+}
+
+/* --- Corona --- */
+.contenedor-corona {
+    position: relative;
+    width: 170px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+
+    transform: scale(0);
+    opacity: 0;
+}
+
+.contenedor-corona.mostrar {
+    animation: apareceCorona 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes apareceCorona {
+    0%   {
+        transform: scale(0);
+        opacity: 0;
+    }
+    60%  {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.img-corona {
+    width: 80%;
+    height: auto;
+
+}
+
+/* Brillo tipo "brillantina" que recorre la corona cada 6s */
+.destello-corona {
+    position: absolute;
+    inset: -10% -40%;
+    background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.75) 50%, transparent 60%);
+    transform: translateX(-120%);
+    animation: recorreDestello 6s ease-in-out infinite;
+    animation-delay: 2s;
+    mix-blend-mode: screen;
+}
+
+@keyframes recorreDestello {
+    0%, 8%   {
+        transform: translateX(-120%);
+    }
+    20%      {
+        transform: translateX(120%);
+    }
+    100%     {
+        transform: translateX(120%);
+    }
+}
+
+/*=============================
+  Texto INVITACIÓN
+==============================*/
+
+.texto-invitacion{
+
+    margin: 0;
+
+    margin-top: -8px;
+    margin-bottom: -6px;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    letter-spacing: .55em;
+
+    text-transform: uppercase;
+
+    color: #B8943D;
+
+    text-shadow:
+        0 1px 1px rgba(255,255,255,.4),
+        0 0 8px rgba(212,175,55,.25);
+
+}
+
+/* --- Título MIS 15 --- */
+.titulo-mis15 {
+    font-family: 'Cormorant Garamond', serif;
+
+    font-weight: 800;
+
+    letter-spacing: 0;
+
+    color: #8A8242;
+    opacity: 0;
+    transform: translateY(20px);
+    font-size: 2rem;
+    line-height:1;
+
+}
+
+.titulo-mis15.mostrar {
+    animation: apareceTexto var(--duracion-media) ease forwards;
+}
+
+
+
+@keyframes apareceTexto {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.adorno-dorado{
+
+    width:140px;
+    height:2px;
+
+    margin-top: 2px;
+    margin-bottom: .8rem;
+
+    background:linear-gradient(
+        to right,
+        transparent,
+        #D4AF37,
+        transparent
+        );
+
+    margin:0;
+}
+
+/* --- Nombre manuscrito con efecto de escritura --- */
+.nombre-manuscrito {
+    font-family: "Parisienne", cursive;
+    font-weight: 400;
+    color: #a48238;
+    margin-top: -10px;
+    font-size: 4.2rem;
+    line-height: 1.1;
+}
+
+.nombre-manuscrito.mostrar {
+    opacity: 1;
+    transition: opacity var(--duracion-suave) ease;
+}
+
+
+
+@keyframes parpadeoCursor {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* --- Sobre --- */
+.contenedor-sobre{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:.6rem;
+
+    cursor:pointer;
+
+    margin-top: -250px;
+}
+
+.contenedor-sobre.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.imagen-sobre{
+
+    width:300px;
+
+    transition:.35s;
+
+}
+
+@keyframes respiraSobre {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50%      {
+        transform: scale(1.03);
+    }
+}
+
+.flecha-curva{
+
+    position: absolute;
+
+    width: 75px;
+
+    bottom: -38px;
+
+    right: 55px;
+
+    transform: rotate(8deg);
+
+    animation: flotarFlecha 2s ease-in-out infinite;
+}
+
+#trazoFlecha {
+    animation: recorreTrazo 2.4s linear infinite;
+}
+
+@keyframes recorreTrazo {
+    to {
+        stroke-dashoffset: -28;
+    }
+}
+
+.texto-indicador{
+
+    position: absolute;
+
+    bottom: -78px;
+
+    color:#8c7233;
+
+    right: -10px;
+
+    width: 150px;
+
+    text-align: center;
+    font-size: 0.75rem;
+
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+/* ==========================================================================
+   PARTE 2 · TRANSICIÓN MÁGICA (baile + partículas)
+   ========================================================================== */
+.parte-dos {
+    position:relative;
+
+    width:100%;
+
+    height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#f8f4e8;
+}
+
+.parte-dos.visible {
+    opacity: 1;
+}
+
+.video-baile {
+    position:relative;
+
+    max-width:90vw;
+
+    max-height:80vh;
+
+    z-index:5;
+
+    border-radius:8px;
+
+    transition:
+        opacity 2s,
+        filter 2s;
+
+}
+
+.halo-magico{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:550px;
+    height:550px;
+
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(255,220,120,.28),
+        rgba(255,220,120,.08),
+        transparent 70%
+        );
+
+    filter: blur(40px);
+
+    mix-blend-mode: screen;
+
+    pointer-events:none;
+
+    z-index:6;
+}
+
+@keyframes respirarHalo{
+
+    0%,100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.08);
+
+    }
+
+}
+
+
+/*=========================================
+    LUCIÉRNAGAS
+=========================================*/
+
+/*=========================================
+    LUCIÉRNAGAS MÁGICAS
+=========================================*/
+
+#contenedorLuciernagas{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:6;
+
+}
+
+.luciernaga{
+
+    position:absolute;
+
+    width:7px;
+
+    height:5px;
+
+    border-radius:50%;
+
+    background:#FFD95A;
+
+    box-shadow:
+
+        0 0 8px #FFD95A,
+
+        0 0 18px #FFE88A,
+
+        0 0 28px #FFF5C2;
+
+    opacity:.75;
+
+    animation:
+
+        moverLuciernaga linear infinite,
+
+        brillarLuciernaga ease-in-out infinite;
+
+}
+@keyframes moverLuciernaga{
+
+    0%{
+
+        transform:translate(0,0);
+
+    }
+
+    25%{
+
+        transform:translate(18px,-12px);
+
+    }
+
+    50%{
+
+        transform:translate(-10px,-25px);
+
+    }
+
+    75%{
+
+        transform:translate(14px,-38px);
+
+    }
+
+    100%{
+
+        transform:translate(0,-55px);
+
+    }
+
+}
+
+@keyframes brillarLuciernaga{
+
+    0%,100%{
+
+        opacity:.25;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes parpadear{
+
+    0%,100%{
+
+        opacity:.2;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+}
+.niebla{
+
+    position:absolute;
+
+    left:-20%;
+
+    bottom:-40px;
+
+    width:140%;
+
+    height:180px;
+
+    background:
+
+        radial-gradient(
+
+        ellipse,
+
+        rgba(255,255,255,.25),
+
+        transparent 70%
+
+        );
+
+    filter:blur(45px);
+
+    animation:moverNiebla 15s linear infinite;
+
+    z-index:2;
+
+}
+
+@keyframes moverNiebla{
+
+    from{
+
+        transform:translateX(0);
+
+    }
+
+    to{
+
+        transform:translateX(-90px);
+
+    }
+
+}
+
+.contenedor-particulas {
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:5;
+
+}
+
+.particula {
+    position:absolute;
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+    background:#F4D46A;
+
+    box-shadow:
+        0 0 8px #ffe48d,
+        0 0 14px #ffd34d;
+
+    animation: vuelaParticula 4.5s ease-out forwards;
+}
+
+@keyframes vuelaParticula{
+
+    from{
+        transform: translate(0,0) scale(1);
+        opacity:1;
+    }
+
+    to{
+        transform:
+            translate(var(--dx), var(--dy))
+            scale(0);
+
+        opacity:0;
+    }
+
+}
+
+/* ==========================================================================
+   PARTE 3 · INVITACIÓN (scroll narrativo)
+   ========================================================================== */
+.invitacion {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--crema);
+    overflow-y: auto;
+}
+
+/* Texturas ambientales, sutiles y no intrusivas */
+
+
+.acuarela-verde {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    max-width: 420px;
+    max-height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107, 122, 79, 0.12), transparent 70%);
+    filter: blur(20px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.acuarela-superior {
+    top: -10%;
+    left: -20%;
+}
+
+.acuarela-inferior {
+    bottom: 5%;
+    right: -25%;
+}
+
+.salpicaduras-doradas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        radial-gradient(circle, rgba(212, 175, 55, 0.35) 2px, transparent 3px),
+        radial-gradient(circle, rgba(212, 175, 55, 0.25) 1.5px, transparent 2.5px);
+    background-size: 140px 160px, 90px 110px;
+    background-position: 10% 20%, 70% 60%;
+}
+
+.seccion {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10vh 8vw;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.seccion-bienvenida::after{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 50%,
+            rgba(212,175,55,.03) 72%,
+            rgba(160,120,40,.08) 100%
+        );
+
+    mix-blend-mode:multiply;
+
+    z-index:2;
+}
+
+.contenido-bienvenida{
+    
+    position:relative;
+    z-index:5;
+}
+
+.img-princesa,
+.rama-superior-izquierda,
+.rama-superior-derecha,
+.hoja-inferior{
+    position:absolute;
+    z-index:3;
+}
+.seccion.seccion-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.titulo-seccion {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(2rem, 8vw, 3rem);
+    color: var(--verde-bosque);
+    letter-spacing: 0.15em;
+    margin: 0;
+}
+
+/* --- Sección 1: Bienvenida --- */
+.seccion-bienvenida{
+    
+    
+    position: relative;
+    overflow: hidden;
+
+    background:
+        url("../multimedia/imagenes/textura-papel.jpeg") center/cover no-repeat,
+        #FAF6ED;
+}
+
+.rama-superior-izquierda{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:230px;
+
+    opacity:.95;
+
+    z-index:1;
+
+    animation:mecerIzquierda 7s ease-in-out infinite;
+
+}
+
+.rama-superior-derecha{
+
+    position:absolute;
+
+    top:0;
+
+    right:0;
+
+    width:200px;
+
+    opacity:.95;
+
+    animation:mecerDerecha 8s ease-in-out infinite;
+
+}
+.hoja-inferior{
+
+    position:absolute;
+
+    right:0px;
+
+    bottom:5px;
+
+    width:180px;
+ 
+    opacity:.95;
+
+    animation:mecerDerecha 6s ease-in-out infinite;
+
+}
+
+@keyframes mecerIzquierda{
+
+    0%,100%{
+
+        transform:
+        rotate(0deg);
+
+    }
+
+    50%{
+
+        transform:
+        rotate(3deg);
+
+    }
+
+}
+
+@keyframes mecerDerecha{
+
+    0%,100%{
+
+        transform:
+        rotate(0deg);
+
+    }
+
+    50%{
+
+        transform:
+        rotate(-4deg);
+
+    }
+
+}
+
+
+.texto-invitaciom{
+
+    font-family:"Cormorant Garamond",serif;
+    font-size:1rem;
+    color:#866b2d;
+    letter-spacing:.04em;
+    text-transform:none;
+    margin-bottom:0rem;
+
+}
+
+.numero15{
+
+    width:min(330px,65vw);
+
+    display:block;
+
+    margin:0 auto;
+
+}
+.nombre-completo{
+
+    margin-top:2rem;
+
+    font-family:"Parisienne",cursive;
+
+    font-size:2rem;
+
+    color:#9A7330;
+
+    line-height:1.1;
+
+}
+
+.frase-bienvenida {
+    width:min(520px,90%);
+
+    margin:auto;
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+    color: var(--verde-oliva);
+}
+
+.img-princesa{
+
+    position:absolute;
+
+    left:-20px;
+
+    bottom:0;
+
+    height:58%;
+
+    z-index:2;
+
+    opacity:.95;
+
+}
+
+/* --- Sección 2: Fecha y lugar --- */
+.seccion-fecha {
+    color: var(--blanco-marfil);
+    background-color: var(--verde-bosque);
+}
+
+.ilustracion-fondo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.18;
+    z-index: 0;
+}
+
+.contenido-fecha {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.etiqueta-fecha {
+    font-family: var(--fuente-cuerpo);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.85rem;
+    color: var(--verde-salvia);
+    margin: 1.2rem 0 0;
+}
+
+.fecha-evento {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+    color: var(--dorado);
+    letter-spacing: 0.08em;
+    margin: 0;
+}
+
+.lugar-evento {
+    font-family: var(--fuente-cuerpo);
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    color: var(--blanco-marfil);
+    margin: 0;
+}
+
+/* --- Sección 3: Confirmación --- */
+.ilustracion-tiana {
+    width: min(65vw, 260px);
+    margin-bottom: 0.5rem;
+}
+
+.titulo-confirmacion {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+}
+
+.boton-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    background-color: #25D366;
+    color: #fff;
+    font-family: var(--fuente-cuerpo);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 40px;
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.boton-whatsapp:hover,
+.boton-whatsapp:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.45);
+}
+
+.icono-whatsapp {
+    width: 24px;
+    height: 24px;
+}
+
+.contador-regresivo {
+    display: flex;
+    gap: 1.4rem;
+    margin-top: 1.2rem;
+}
+
+.bloque-contador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 3.2rem;
+}
+
+.numero-contador {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    color: var(--verde-bosque);
+}
+
+.etiqueta-contador {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.7rem;
+    color: var(--verde-oliva);
+}
+
+.frase-final {
+    max-width: 28em;
+    font-family: var(--fuente-cuerpo);
+    font-style: italic;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    color: var(--verde-oliva);
+    margin-top: 1.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   Foco visible para navegación con teclado (accesibilidad)
+   -------------------------------------------------------------------------- */
+:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 3px;
+}
+
+/* ==========================================================================
+   ADAPTACIÓN A ESCRITORIO (viewport ancho)
+   ========================================================================== */
+@media (min-width: 900px) {
+    .seccion {
+        padding: 10vh 20vw;
+    }
+
+    .contenido-fecha,
+    .frase-bienvenida,
+    .frase-final {
+        max-width: 40em;
+    }
+
+    .video-baile {
+        max-width: 640px;
+    }
+}
