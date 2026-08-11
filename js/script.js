@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     numeroWhatsapp: '51946948867',
 
     // Mensaje predefinido que se enviará al confirmar asistencia.
-    mensajeWhatsapp: 'CONFIRMO MI ASISTENCIA a tu webda',
+    mensajeWhatsapp: 'Hola, Confirmo mi asistencia a los XV de Anyi Milenka. \u{1F49A} \u{2728}',
 
     // Texto que se escribe con efecto de máquina de escribir en la Parte 1.
     nombreManuscrito: 'Milenka',
@@ -329,39 +329,122 @@ function iniciarLuciernagas(){
      5. PARTE 3 · INVITACIÓN CON SCROLL
      ------------------------------------------------------------------------ */
   function mostrarParte3() {
-    parte3.classList.remove('oculto');
-    parte3.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'auto';
 
-    activarRevelacionEnScroll();
-    iniciarContadorRegresivo();
+    // Mostrar inmediatamente la Parte 3
+    parte3.classList.remove('oculto');
+
+    parte3.setAttribute(
+        'aria-hidden',
+        'false'
+    );
+
+    document.body.style.overflow =
+    'hidden';
+
+
+    // Mostrar inmediatamente la bienvenida
+    const bienvenida =
+        document.getElementById(
+            'seccionBienvenida'
+        );
+
+    if (bienvenida) {
+
+        bienvenida.classList.add(
+            'seccion-visible'
+        );
+
+    }
+
+
+    // Funciones que ya tenías
+    
+
     configurarEnlaceWhatsapp();
-  }
+    iniciarScrollNarrativo();
+
+}
 
   // Revela cada sección con una animación suave a medida que entra en pantalla.
   function activarRevelacionEnScroll() {
-    const secciones = document.querySelectorAll('#parte3 .seccion');
+
+    const secciones =
+        document.querySelectorAll(
+            '#parte3 .seccion'
+        );
+
 
     if (!('IntersectionObserver' in window)) {
-      // Alternativa simple si el navegador no soporta IntersectionObserver.
-      secciones.forEach(function (seccion) {
-        seccion.classList.add('seccion-visible');
-      });
-      return;
+
+        secciones.forEach(function(seccion) {
+
+            seccion.classList.add(
+                'seccion-visible'
+            );
+
+        });
+
+        return;
     }
 
-    const observador = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (entrada) {
-        if (entrada.isIntersecting) {
-          entrada.target.classList.add('seccion-visible');
-        }
-      });
-    }, { threshold: 0.3 });
 
-    secciones.forEach(function (seccion) {
-      observador.observe(seccion);
-    });
-  }
+    const observador =
+        new IntersectionObserver(
+            function(entradas) {
+
+                entradas.forEach(
+                    function(entrada) {
+
+                        if (
+                            entrada.isIntersecting
+                        ) {
+
+                            entrada.target
+                                .classList.add(
+                                    'seccion-visible'
+                                );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.1
+            }
+        );
+
+
+    secciones.forEach(
+        function(seccion) {
+
+            /*
+             * La bienvenida ya se muestra
+             * inmediatamente después del baile.
+             */
+
+            if (
+                seccion.id ===
+                'seccionBienvenida'
+            ) {
+
+                seccion.classList.add(
+                    'seccion-visible'
+                );
+
+                return;
+
+            }
+
+            observador.observe(
+                seccion
+            );
+
+        }
+    );
+
+}
 
   /* ------------------------------------------------------------------------
      6. CONTADOR REGRESIVO
@@ -413,3 +496,576 @@ function iniciarLuciernagas(){
      ------------------------------------------------------------------------ */
   iniciarSecuenciaIntroduccion();
 });
+/* ============================================================
+   PRIMER SCROLL · PAPEL FECHA
+   ============================================================ */
+function iniciarScrollNarrativo() {
+document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    const escena =
+        document.getElementById(
+            'escenaNarrativa'
+        );
+    const bienvenida =
+        document.getElementById(
+            'seccionBienvenida'
+        );
+
+    const papel =
+        document.getElementById(
+            'papelFecha'
+        );
+
+    const papelHora =
+        document.getElementById(
+            'papelHora'
+        );
+
+    const direccionFinal =
+        document.getElementById(
+            'direccionFinal'
+        );
+
+
+    if (
+        !escena ||
+        !bienvenida ||
+        !papel ||
+        !papelHora ||
+        !direccionFinal
+    ) {
+
+        return;
+
+    }
+
+
+    /* ========================================================
+       ESTADO DE LA ANIMACIÓN
+       ======================================================== */
+
+    let paso = 0;
+const padrinos =
+    document.getElementById(
+        'seccionPadrinos'
+    );
+    
+    let animando = false;
+
+    let inicioY = 0;
+
+    let inicioX = 0;
+
+
+    /*
+     * Cantidad mínima de movimiento
+     * necesario para considerar que
+     * el usuario hizo scroll.
+     */
+
+    const sensibilidad = 45;
+
+
+    /* ========================================================
+       ANIMAR
+       ======================================================== */
+
+    function irAlPaso(nuevoPaso) {
+
+        if (animando) {
+            return;
+        }
+
+
+        /*
+         * Evitamos salir de:
+
+         * 0 = bienvenida
+         * 1 = fecha
+         * 2 = hora
+         * 3 = dirección
+         */
+
+        nuevoPaso =
+            Math.max(
+                0,
+                Math.min(
+                    3,
+                    nuevoPaso
+                )
+            );
+
+
+        if (
+    nuevoPaso === paso
+) {
+
+    return;
+
+}
+
+
+const pasoInicial =
+    paso;
+
+
+pasoAnteriorValor =
+    pasoInicial;
+
+
+paso =
+    nuevoPaso;
+
+
+animando =
+    true;
+
+
+        /* ====================================================
+           DURACIÓN
+           ==================================================== */
+
+        const duracion =
+            850;
+
+
+        /* ====================================================
+           PROGRESO
+           ==================================================== */
+
+        const inicioPaso =
+    pasoInicial;
+
+
+        const diferencia =
+            paso -
+            inicioPaso;
+
+
+        const tiempoInicio =
+            performance.now();
+
+
+        function animar(tiempo) {
+
+            const transcurrido =
+                tiempo -
+                tiempoInicio;
+
+
+            let progreso =
+                transcurrido /
+                duracion;
+
+
+            progreso =
+                Math.min(
+                    1,
+                    progreso
+                );
+
+
+            /*
+             * Suavizado elegante.
+             */
+
+            const suave =
+                1 -
+                Math.pow(
+                    1 - progreso,
+                    3
+                );
+
+
+            actualizarVisual(
+                inicioPaso +
+                (
+                    diferencia *
+                    suave
+                )
+            );
+
+
+            if (
+                progreso < 1
+            ) {
+
+                requestAnimationFrame(
+                    animar
+                );
+
+            } else {
+
+                actualizarVisual(
+                    paso
+                );
+
+
+                animando =
+                    false;
+
+            }
+
+        }
+
+
+        requestAnimationFrame(
+            animar
+        );
+
+    }
+
+
+    /*
+     * Guarda el paso anterior.
+     */
+
+    let pasoAnteriorValor = 0;
+
+
+    function pasoAnterior() {
+
+        return pasoAnteriorValor;
+
+    }
+
+
+    /* ========================================================
+       ACTUALIZACIÓN VISUAL
+       ======================================================== */
+
+    function actualizarVisual(progreso) {
+
+
+        /* ====================================================
+           BIENVENIDA
+           ==================================================== */
+
+        let opacidadBienvenida;
+
+
+        if (
+            progreso <= 1
+        ) {
+
+            opacidadBienvenida =
+                1 -
+                (
+                    progreso *
+                    0.25
+                );
+
+        } else {
+
+            opacidadBienvenida =
+                0.75 -
+                (
+                    (progreso - 1) *
+                    0.45
+                );
+
+        }
+
+
+        bienvenida.style.opacity =
+            Math.max(
+                0.22,
+                opacidadBienvenida
+            );
+
+
+        /* ====================================================
+           FECHA
+           ==================================================== */
+
+        const fecha =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    progreso
+                )
+            );
+
+
+        const posicionFecha =
+            -120 +
+            (
+                fecha *
+                120
+            ) -8;
+
+
+        papel.style.left =
+            posicionFecha +
+            '%';
+
+
+        papel.style.opacity =
+            Math.min(
+                1,
+                fecha * 3
+            );
+
+
+        /* ====================================================
+           HORA
+           ==================================================== */
+
+        const hora =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    progreso - 1
+                )
+            );
+
+
+        const posicionHora =
+            -120 +
+            (
+                hora *
+                110
+            );
+
+
+        papelHora.style.right =
+            posicionHora +
+            '%';
+
+
+        papelHora.style.opacity =
+            Math.min(
+                1,
+                hora * 3
+            );
+
+
+        /* ====================================================
+           DIRECCIÓN
+           ==================================================== */
+
+        const direccion =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    progreso - 2
+                )
+            );
+
+
+        const posicionDireccion =
+            100 -
+            (
+                direccion *
+                100
+            );
+
+
+        direccionFinal.style.transform =
+    'translateX(17%) translateY(' +
+    posicionDireccion +
+    '%) rotate(-7deg)';
+
+
+        direccionFinal.style.opacity =
+            Math.min(
+                1,
+                direccion * 3
+            );
+
+    }
+
+
+    /* ========================================================
+       TOUCHSTART
+       ======================================================== */
+
+    escena.addEventListener(
+    'touchstart',
+    function(evento) {
+
+        const toque =
+            evento.touches[0];
+
+        inicioY =
+            toque.clientY;
+
+        inicioX =
+            toque.clientX;
+
+    },
+    {
+        passive: false
+    }
+);
+
+/* ========================================================
+   TOUCHMOVE · BLOQUEAR SCROLL NATIVO
+   ======================================================== */
+
+escena.addEventListener(
+    'touchmove',
+    function(evento) {
+
+        evento.preventDefault();
+
+    },
+    {
+        passive: false
+    }
+);
+    /* ========================================================
+       TOUCHEND
+       ======================================================== */
+
+    escena.addEventListener(
+        'touchend',
+        function(evento) {
+
+            const toque =
+                evento.changedTouches[0];
+
+
+            const finalY =
+                toque.clientY;
+
+
+            const finalX =
+                toque.clientX;
+
+
+            const movimientoY =
+                inicioY -
+                finalY;
+
+
+            const movimientoX =
+                inicioX -
+                finalX;
+
+
+            /*
+             * Solo nos interesa un gesto
+             * predominantemente vertical.
+             */
+
+            if (
+                Math.abs(movimientoY) <
+                sensibilidad
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                Math.abs(movimientoY) <
+                Math.abs(movimientoX)
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+             * GESTO HACIA ARRIBA
+             */
+
+            if (
+    movimientoY > 0
+) {
+
+    /*
+     * Todavía quedan trozos por mostrar.
+     */
+
+    if (paso < 3) {
+
+        pasoAnteriorValor =
+            paso;
+
+        irAlPaso(
+            paso + 1
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * ====================================================
+     * CUARTO GESTO
+     *
+     * Los tres trozos ya están completos.
+     * Ahora sí pasamos a Padrinos.
+     * ====================================================
+     */
+if (paso === 3) {
+
+    /*
+     * Terminó la escena narrativa.
+     * Desde aquí vuelve el scroll normal.
+     */
+
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+
+    if (padrinos) {
+
+        padrinos.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+    }
+
+}
+
+}
+
+
+            /*
+             * GESTO HACIA ABAJO
+             */
+
+            else {
+
+    if (paso > 0) {
+
+        pasoAnteriorValor =
+            paso;
+
+        irAlPaso(
+            paso - 1
+        );
+
+        return;
+
+    }
+
+}
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ========================================================
+       ESTADO INICIAL
+       ======================================================== */
+
+    actualizarVisual(
+        0
+    );
+
+}
+
